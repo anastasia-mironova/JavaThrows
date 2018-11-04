@@ -1,7 +1,9 @@
 package com.company;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PhoneBook {
@@ -11,11 +13,10 @@ public class PhoneBook {
    private String checkBuff;
    private  File file = new File("callNumber.txt");
 
-    public  boolean checkRepeat(String currentValue) throws Exception{
+    public  boolean checkRepeat(String currentValue) throws IOException{
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
             checkBuff = scanner.nextLine();
-            System.out.println(checkBuff.equals(buff));
             if (checkBuff.equals(currentValue)){
                 scanner.close();
                 return true;
@@ -27,8 +28,8 @@ public class PhoneBook {
 
     }
 
-    public void enterData() throws Exception {
-        try{
+    public void enterData() throws IOException,RepeatExсeption {
+
         Scanner scan = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
             System.out.println("Enter the name: ");
@@ -46,10 +47,8 @@ public class PhoneBook {
 
 
         }
-        }
-        catch (RepeatExсeption e){
-            e.toString();
-        }
+    }
+
     }
 
   class RepeatExсeption extends Exception{
@@ -57,6 +56,6 @@ public class PhoneBook {
            return "This contact already exists";
         }
 
-       }
+
 
 }
